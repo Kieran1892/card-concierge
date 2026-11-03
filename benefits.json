@@ -1,25 +1,283 @@
 {
   "schemaVersion": 1,
-  "lastVerified": null,
-  "status": "pending_verification",
+  "lastVerified": "2026-11-02",
+  "status": "manual_issuer_review",
   "cards": [
     {
       "id": "amex-platinum",
       "name": "American Express Personal Platinum",
-      "rewards": [],
-      "benefits": []
+      "source": "https://www.americanexpress.com/en-us/account/get-started/platinum/benefits-overview",
+      "rewards": [
+        [
+          "direct_flights",
+          5
+        ],
+        [
+          "amex_prepaid_hotels",
+          5
+        ],
+        [
+          "other",
+          1
+        ]
+      ],
+      "benefits": [
+        [
+          "lululemon",
+          75,
+          "quarterly"
+        ],
+        [
+          "Resy",
+          100,
+          "quarterly"
+        ],
+        [
+          "Hotel credit",
+          300,
+          "semiannual"
+        ],
+        [
+          "Uber Cash",
+          15,
+          "monthly_december_35"
+        ],
+        [
+          "Digital entertainment",
+          25,
+          "monthly"
+        ],
+        [
+          "Airline incidental fees",
+          200,
+          "annual"
+        ],
+        [
+          "CLEAR Plus",
+          219,
+          "annual"
+        ],
+        [
+          "Oura Ring",
+          200,
+          "annual"
+        ],
+        [
+          "Walmart Plus",
+          12.95,
+          "monthly"
+        ],
+        [
+          "Uber One",
+          120,
+          "annual"
+        ],
+        [
+          "Airport lounge access",
+          0,
+          "membership"
+        ],
+        [
+          "Fine Hotels and Resorts",
+          0,
+          "membership"
+        ],
+        [
+          "Hotel elite status",
+          0,
+          "membership"
+        ],
+        [
+          "Global Entry or TSA PreCheck",
+          0,
+          "multi_year"
+        ]
+      ]
     },
     {
       "id": "chase-business-reserve",
       "name": "Chase Sapphire Reserve for Business",
-      "rewards": [],
-      "benefits": []
+      "source": "https://creditcards.chase.com/business-credit-cards/sapphire/reserve",
+      "rewards": [
+        [
+          "chase_travel",
+          8
+        ],
+        [
+          "direct_flights",
+          4
+        ],
+        [
+          "direct_hotels",
+          4
+        ],
+        [
+          "search_social_ads",
+          3
+        ],
+        [
+          "lyft",
+          5
+        ],
+        [
+          "other",
+          1
+        ]
+      ],
+      "benefits": [
+        [
+          "Travel credit",
+          300,
+          "anniversary_year"
+        ],
+        [
+          "The Edit hotels",
+          500,
+          "annual_2026"
+        ],
+        [
+          "Select Chase Travel hotels",
+          250,
+          "one_time_2026"
+        ],
+        [
+          "DoorDash promotions",
+          25,
+          "monthly"
+        ],
+        [
+          "Lyft credit",
+          10,
+          "monthly"
+        ],
+        [
+          "Google Workspace",
+          200,
+          "annual"
+        ],
+        [
+          "ZipRecruiter",
+          200,
+          "semiannual"
+        ],
+        [
+          "Curated gift cards",
+          50,
+          "semiannual"
+        ],
+        [
+          "Global Entry TSA or NEXUS",
+          120,
+          "four_year"
+        ],
+        [
+          "DashPass",
+          0,
+          "membership"
+        ],
+        [
+          "Airport lounges",
+          0,
+          "membership"
+        ],
+        [
+          "IHG Platinum Elite",
+          0,
+          "membership"
+        ],
+        [
+          "The Edit hotel perks",
+          0,
+          "membership"
+        ]
+      ]
     },
     {
       "id": "chase-preferred",
       "name": "Chase Sapphire Preferred",
-      "rewards": [],
-      "benefits": []
+      "source": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred",
+      "rewards": [
+        [
+          "chase_travel",
+          5
+        ],
+        [
+          "restaurants",
+          3
+        ],
+        [
+          "online_groceries",
+          3
+        ],
+        [
+          "gas",
+          3
+        ],
+        [
+          "ev_charging",
+          3
+        ],
+        [
+          "streaming",
+          3
+        ],
+        [
+          "lyft",
+          5
+        ],
+        [
+          "other_travel",
+          2
+        ],
+        [
+          "other",
+          1
+        ]
+      ],
+      "benefits": [
+        [
+          "Chase Travel hotel credit",
+          100,
+          "anniversary_year"
+        ],
+        [
+          "DoorDash promotion",
+          10,
+          "monthly"
+        ],
+        [
+          "DashPass",
+          0,
+          "membership"
+        ],
+        [
+          "Anniversary points bonus",
+          0,
+          "anniversary_year"
+        ],
+        [
+          "Rental car protection",
+          0,
+          "insurance"
+        ],
+        [
+          "Trip cancellation protection",
+          0,
+          "insurance"
+        ],
+        [
+          "Baggage delay protection",
+          0,
+          "insurance"
+        ]
+      ]
     }
+  ],
+  "notes": [
+    "All amounts are maximum advertised US-dollar benefits, not account balances.",
+    "Check enrollment, eligibility, merchant coding and current terms.",
+    "Do not treat this file as an automatically maintained issuer feed.",
+    "Some benefits have transaction caps, expiration dates or non-calendar reset periods.",
+    "Benefits with a zero amount are memberships or noncash perks, not unused cash."
   ]
 }
