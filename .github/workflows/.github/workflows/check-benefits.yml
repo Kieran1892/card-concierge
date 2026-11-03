@@ -1,0 +1,113 @@
+name: Card Concierge Benefits Monitor
+
+on:
+  schedule:
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check official card pages
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pages = {
+              "Amex Personal Platinum": "https://www.americanexpress.com/us/credit-cards/card/platinum/",
+              "Chase Sapphire Reserve for Business": "https://creditcards.chase.com/business-credit-cards/sapphire/reserve",
+              "Chase Sapphire Preferred": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred"
+            };
+
+            const crypto = require("crypto");
+            const fs = require("fs");
+            const key = "card-concierge-monitor";
+            const issueTitle = "Card Concierge — potential benefits changes";
+            let snapshots = {};
+
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              { ...context.repo, state: "all", per_page: 100 }
+            );
+            let tracking = issues.find(i => i.title === issueTitle && !i.pull_request);
+
+            if (tracking) {
+              const marker = tracking.body.match(/<!-- snapshots:(.*?) -->/s);
+              if (marker) {
+                try {
+                  snapshots = JSON.parse(
+                    Buffer.from(marker[1], "base64").toString("utf8")
+                  );
+                } catch(e) {}
+              }
+            }
+
+            const changes = [];
+            const errors = [];
+
+            for (const [name,url] of Object.entries(pages)) {
+              try {
+                const res = await fetch(url, {
+                  headers: { "User-Agent": "CardConciergeBenefitsMonitor/1.0" },
+                  signal: AbortSignal.timeout(20000)
+                });
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                let html = await res.text();
+                if (html.length < 500) throw new Error("Unexpected short response");
+
+                let cleaned = html
+                  .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+                  .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
+                  .replace(/<!--(?! snapshots:)[\s\S]*?-->/g, "")
+                  .replace(/\s+/g, " ")
+                  .trim();
+
+                let hash = crypto.createHash("sha256")
+                  .update(cleaned).digest("hex");
+
+                if (snapshots[name] && snapshots[name] !== hash)
+                  changes.push(name + "\n" + url);
+                snapshots[name] = hash;
+              } catch(e) {
+                errors.push(name + ": " + e.message);
+              }
+            }
+
+            const marker = "<!-- snapshots:" +
+              Buffer.from(JSON.stringify(snapshots)).toString("base64") +
+              " -->";
+
+            const now = new Date().toISOString();
+            let body =
+              "## Card benefits monitoring\n\n" +
+              "Last check: " + now + "\n\n" +
+              "This is a webpage-change detector, not a verified benefits feed. " +
+              "Changes may be caused by layout, advertising, or unrelated text.\n\n" +
+              (changes.length
+                ? "### Potential changes\n" + changes.join("\n\n")
+                : "No changes detected against the stored snapshots.") +
+              "\n\n" +
+              (errors.length
+                ? "### Pages not checked successfully\n" + errors.join("\n")
+                : "") +
+              "\n\n" + marker;
+
+            if (tracking) {
+              await github.rest.issues.update({
+                ...context.repo,
+                issue_number: tracking.number,
+                body,
+                state: changes.length || errors.length ? "open" : tracking.state
+              });
+            } else {
+              await github.rest.issues.create({
+                ...context.repo,
+                title: issueTitle,
+                body,
+                labels: []
+              });
+            }
