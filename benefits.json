@@ -1,1 +1,25 @@
-
+{
+  "schemaVersion": 1,
+  "lastVerified": null,
+  "status": "pending_verification",
+  "cards": [
+    {
+      "id": "amex-platinum",
+      "name": "American Express Personal Platinum",
+      "rewards": [],
+      "benefits": []
+    },
+    {
+      "id": "chase-business-reserve",
+      "name": "Chase Sapphire Reserve for Business",
+      "rewards": [],
+      "benefits": []
+    },
+    {
+      "id": "chase-preferred",
+      "name": "Chase Sapphire Preferred",
+      "rewards": [],
+      "benefits": []
+    }
+  ]
+}
